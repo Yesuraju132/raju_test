@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+    <script src="sample1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <h1>GeeksforGeeks</h1>
+<h3>How to redirect after a jQuery Ajax Call</h3>
+<div class="button-container-div">
+    <button>Click me</button>
+</div>
+<style>
+    h1 {
+        color: green;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h3 {
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        background-color: green;
+        color: aliceblue;
+        width: 100px;
+        height: 50px;
+    }
+
+    .button-container-div {
+        width: 100px;
+        height: 100px;
+        margin: auto;
+    }
+</style>
+
+</head>
+
+<body>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $.ajax({
+                    url: 'sample1.js',
+                    dataType: 'text',
+                    success: function (response) {
+                     // Parse the JSON string into a JavaScript object
+                    var response = generateJSONResponse(); // Call the function to get the JSON response
+
+// Parse the JSON string into a JavaScript object
+var responseObject = JSON.parse(response);
+
+// Access the 'redrct' property
+var redrctValue = responseObject.redrct;
+
+// Use the 'redrctValue' variable as needed
+console.log(redrctValue);
+if(redrctValue == true){
+    window.location.href = "sample2.html";
+}
+
+                        
+
+                    },
+                    error: function (exception) {
+                        console.log("Error:", exception);
+                        console.log("Status code:", exception.status);
+                        console.log("Error message:", exception.statusText);
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>
